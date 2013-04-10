@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+		<bean id="c1" class="ejemplo.anotaciones.modelo.Coche">
+					<property name="marca" value="seat" />
+					<property name="modelo" value="panda" />
+				</bean>
+
+	<bean id="coches" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="c1"/>
+				<bean class="ejemplo.anotaciones.modelo.Coche">
+					<property name="marca" value="ford" />
+					<property name="modelo" value="fiesta" />
+				</bean>	
+				<bean class="ejemplo.anotaciones.modelo.Coche">
+					<property name="marca" value="#{c1.marca}" />
+					<property name="modelo" value="ibiza" />
+				</bean>		
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="coches2" class="java.util.ArrayList">
+		<constructor-arg value="#{coches.?[#this.modelo.length()>4]}">
+		</constructor-arg>
+	</bean>
+
+
+</beans>

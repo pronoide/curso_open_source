@@ -1,5 +1,6 @@
 package aplicaciones;
 
+import modelo.Direccion;
 import modelo.Factura;
 
 import org.springframework.context.ApplicationContext;
@@ -17,5 +18,10 @@ public class ProgramaAnotaciones {
 				applicationContext.getBean(Factura.class);
 		
 		System.out.println(factura);
+		
+		Direccion direccion = applicationContext
+			.getBean("direccion2",Direccion.class);
+		
+		System.out.println(direccion);
 	}
 }

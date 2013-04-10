@@ -25,7 +25,8 @@
 	</bean>
 	
 	<bean id="coches2" class="java.util.ArrayList">
-		<constructor-arg value="#{coches.?[#this.modelo.length()>4]}">
+		<constructor-arg value="#{coches.?[#this.modelo.length() &lt; 6]}">
+			
 		</constructor-arg>
 	</bean>
 

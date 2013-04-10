@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 1.- java.util.Timer o timers del JDK -->
+<!-- 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean"> -->
+<!-- 		<property name="scheduledTimerTasks"> -->
+<!-- 			<list> -->
+<!-- 				<bean class="org.springframework.scheduling.timer.ScheduledTimerTask"> -->
+<!-- 					<property name="period" value="10000"/> -->
+<!-- 					<property name="delay" value="5000"/> -->
+<!-- 					<property name="timerTask"> -->
+<!-- 						<bean class="ejemplos.tareas.SaludosTareaJSE"/> -->
+<!-- 					</property> -->
+<!-- 				</bean>	 -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- 2.- Libreria Quartz -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<bean class="org.springframework.scheduling.quartz.CronTriggerBean">
+					<property name="cronExpression" 
+						value="0,15,30,45 * * * * ?"/>
+					<property name="jobDetail">
+						<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+							<property name="targetObject">
+								<bean class="ejemplos.tareas.Saludos"/>
+							</property>
+							<property name="targetMethod" value="saludar"/>
+						</bean>
+					</property>	
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
